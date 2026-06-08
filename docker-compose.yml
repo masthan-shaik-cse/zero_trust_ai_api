@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  zero_trust_proxy:
+    build: .
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - API_PORT=8443
+      - LOG_LEVEL=DEBUG
+      - TLS_ENABLED=true
+    ports:
+      - "8443:8443"
+    networks:
+      - enterprise_network
+
+networks:
+  enterprise_network:
+    driver: bridge

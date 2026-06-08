@@ -1,21 +1,20 @@
 # Enterprise Zero-Trust AI Alignment Proxy
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Security: Zero-Trust](https://img.shields.io/badge/Security-Prompt_Firewall_%7C_DLP-purple.svg)](#)
+A state-of-the-art framework for securing Large Language Model (LLM) inference endpoints. This architecture transcends traditional API wrapping by instantiating an absolute Zero-Trust paradigm. It enforces Input Alignment via Prompt Injection Firewalls, Data Sovereignty via PII Masking, and Output Security via Constitutional Auditing across a massively scalable High-Performance Computing environment.
 
-A state-of-the-art framework for securing Large Language Model (LLM) inference endpoints. This architecture transcends traditional API wrapping by instantiating an absolute Zero-Trust paradigm. It enforces Input Alignment via Prompt Injection Firewalls, Data Sovereignty via PII Masking, and Output Security via Constitutional Auditing.
+## Enterprise Architecture (10-Folder Layout)
 
-## Core Architectural Modules
-
-### 1. Prompt Injection Firewall (`src/zero_trust_ai_api/security/prompt_injection_firewall.py`)
-Foundational models are highly vulnerable to adversarial syntax ("jailbreaks"). This module establishes a deterministic perimeter defense. It intercepts raw user prompts and performs heuristic and semantic analysis to detect adversarial signatures (e.g., "ignore previous instructions"), neutralizing prompt injections before they reach the core reasoning engine.
-
-### 2. PII Data Loss Prevention (DLP) (`src/zero_trust_ai_api/middleware/pii_dlp_masking.py`)
-In a true Zero-Trust architecture, not even the AI provider is trusted with plaintext sensitive data. This middleware utilizes Named Entity Recognition (NER) to scan incoming prompts, dynamically redacting Personally Identifiable Information (SSNs, Emails, Credit Cards) and replacing them with anonymized tokens, guaranteeing zero-shot data loss prevention.
-
-### 3. Constitutional Output Auditor (`src/zero_trust_ai_api/api/constitutional_output_auditor.py`)
-Even with sanitized inputs, LLMs can hallucinate sensitive internal data. This reverse-proxy filter intercepts all generated text before it returns to the client. It scans the output against an Enterprise Constitution to ensure zero leakage of private keys, system architecture topologies, or internal IP configurations.
+To support massive High-Performance Computing proxy workloads, this repository is structured into 10 dedicated domains:
+1. `config/`: Configuration files for distributed TLS, RBAC, and Proxy rules.
+2. `tests/`: Automated unit and integration testing suite for adversarial payloads.
+3. `scripts/`: Shell scripts for Slurm cluster orchestration.
+4. `docs/`: Academic whitepapers and generated Sphinx documentation.
+5. `models/`: Storage for checkpointed NER and Heuristic detection models.
+6. `data/`: Adversarial prompt datasets for continuous red-teaming.
+7. `logs/`: Real-time cryptographic audit logs and blocked payload metrics.
+8. `notebooks/`: Exploratory Data Analysis (EDA) on prompt injection signatures.
+9. `docker/`: Build contexts for containerized Reverse-Proxies.
+10. `src/`: The core proprietary zero-trust codebase.
 
 ## System Pipeline Architecture
 
@@ -32,27 +31,24 @@ graph TD
     F -->|Verified Secure| H[Final Client Response]
 ```
 
-## Build and Deployment
+## The 10-Section Alignment Orchestrator (`main.py`)
 
-The package adheres to strict enterprise Python standards for secure AI deployment.
-
-### Installation
+The primary entrypoint is a massive command-line tool that orchestrates the entire AI Security lifecycle across the 10-folder architecture. Execute the entire pipeline via:
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -e .
-```
-
-### End-to-End Orchestration
-The primary entrypoint facilitates modular execution of the Zero-Trust lifecycle:
-```bash
-python src/zero_trust_ai_api/main.py --run_all
+python src/zero_trust_ai_api/main.py --run_all_enterprise_pipelines
 ```
 
 **Individual Execution Modules:**
-- `--run_injection_firewall`: Execute the Input Alignment Perimeter Defense.
-- `--test_pii_dlp_masking`: Execute the NER-based Data Loss Prevention Masking.
-- `--execute_output_audit`: Execute the Constitutional Reverse-Proxy Output Filter.
+1. `--initiate_zero_trust_cluster`: Initialize the distributed Zero-Trust Proxy.
+2. `--launch_prompt_injection_firewall`: Launch the Heuristic Input Defense.
+3. `--execute_pii_dlp_masking`: Execute NER-based Data Sovereignty Redaction.
+4. `--audit_constitutional_output`: Audit generated inference against IP leakage.
+5. `--run_rbac_authorization_checks`: Verify strict JWT identity controls.
+6. `--simulate_jailbreak_attack`: Stress-test the perimeter with adversarial prompts.
+7. `--compile_security_audit_report`: Aggregate intercepted payload metrics into `logs/`.
+8. `--deploy_api_guardrails`: Package deterministic rate limiters and constraints.
+9. `--synchronize_cloud_checkpoints`: Sync cryptographic logs securely to an S3 bucket.
+10. `--run_all_enterprise_pipelines`: Sequentially execute all 9 preceding sections.
 
 ## Alignment Philosophy
-Alignment is not merely behavioral tuning; it is cryptographic and deterministic security. By enforcing strict Input-Output boundaries (Firewalls and DLP), this proxy guarantees that the LLM operates within a perfectly secure and sovereign computational enclave.
+Alignment is not merely behavioral tuning; it is cryptographic and deterministic security. By enforcing strict Input-Output boundaries (Firewalls and DLP) within a massive, 10-folder Dockerized ecosystem, this proxy guarantees that the LLM operates within a perfectly secure computational enclave.
